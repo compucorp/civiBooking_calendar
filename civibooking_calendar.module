@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * implements hook_views_api
+ */
+function civibooking_calendar_views_api() {
+    return array(
+        'api' => 3,
+        'path' => drupal_get_path('module', 'civibooking_calendar') . '/views',
+    );
+}
+
+/**
+ * implements hook civicrm_alter_drupal_entities
+ *
+ * @param array $whitelist
+ */
+function civibooking_calendar_civicrm_alter_drupal_entities(&$whitelist) {
+    $whitelist['civicrm_booking'] = 'booking';
+}
