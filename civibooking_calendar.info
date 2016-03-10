@@ -11,3 +11,4 @@ dependencies[] = calendar
 dependencies[] = entity
 
 files[] = views/includes/civibooking_calendar_date_views_argument_handler.inc
+files[] = views/includes/civibooking_calendar_plugin_row.inc

@@ -16,7 +16,7 @@ class civibooking_calendar_date_views_argument_handler extends date_views_argume
         $this->query_fields = array();
         foreach ((array) $this->options['date_fields'] as $delta => $name) {
             if (array_key_exists($name, $fields) && $field = $fields[$name]) {
-                $date_handler = new date_sql_handler(DATE_DATETIME, date_default_timezone());
+                $date_handler = new date_sql_handler(DATE_FORMAT_DATETIME, date_default_timezone());
                 $date_handler->granularity = $this->options['granularity'];
                 $date_handler->db_timezone = date_get_timezone_db($field['tz_handling']);
                 $date_handler->local_timezone = date_get_timezone($field['tz_handling']);
