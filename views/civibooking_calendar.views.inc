@@ -327,3 +327,10 @@ function civibooking_calendar_views_plugins() {
     return $data;
 }
 
+function civibooking_calendar_views_query_alter(&$view, &$query) {
+  // implement this only if the view is for civicrm_booking and calendar output is used
+  if($view->base_table == 'civicrm_booking' && get_class($view->style_plugin) == 'calendar_plugin_style') {
+    $queryString = preg_replace('/start_date/', 'end_date', $query->where['date']['conditions'][0]['field'], 1);
+    $query->where['date']['conditions'][0]['field'] = $queryString;
+  }
+}
