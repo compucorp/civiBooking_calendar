@@ -78,6 +78,7 @@ function civibooking_calendar_views_data_alter(&$data) {
         'filter' => array(
             'handler' => 'civicrm_handler_filter_datetime',
             'help' => t('Filter on CiviCRM Booking Start Date field.'),
+            'is date' => TRUE,
         ),
         'sort' => array(
             'handler' => 'civicrm_handler_sort_datetime',
@@ -101,6 +102,7 @@ function civibooking_calendar_views_data_alter(&$data) {
         'filter' => array(
             'handler' => 'civicrm_handler_filter_datetime',
             'help' => t('Filter on CiviCRM Booking End Date field.'),
+            'is date' => TRUE,
         ),
         'sort' => array(
             'handler' => 'civicrm_handler_sort_datetime',
