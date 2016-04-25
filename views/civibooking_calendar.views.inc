@@ -370,9 +370,11 @@ function civibooking_calendar_views_pre_render(&$view) {
     $results = $view->result;
 
     foreach($results as $key => $result) {
-      $bookingStatusMap = get_status_values();
-      $statusId = $result->civicrm_booking_status_id;
-      $results[$key]->civicrm_booking_status_id = $bookingStatusMap[$statusId];
+      if(isset($result->civicrm_booking_status_id)) {
+        $bookingStatusMap = get_status_values();
+        $statusId = $result->civicrm_booking_status_id;
+        $results[$key]->civicrm_booking_status_id = $bookingStatusMap[$statusId];
+      }
     }
     $view->result = $results;
   }
