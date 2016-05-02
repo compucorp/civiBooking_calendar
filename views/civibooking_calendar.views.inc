@@ -306,7 +306,7 @@ function civibooking_calendar_views_plugins() {
             'calendar_style' => array(
                 'title' => t('Calendar'),
                 'help' => t('Present view results as a Calendar.'),
-                'handler' => 'calendar_plugin_style',
+                'handler' => 'civibooking_calendar_plugin_style',
                 'path' => "$module_path/includes",
                 'theme' => 'calendar_style',
                 'theme file' => 'theme.inc',
@@ -359,7 +359,7 @@ function civibooking_calendar_views_plugins() {
 
 function civibooking_calendar_views_query_alter(&$view, &$query) {
   // implement this only if the view is for civicrm_booking and calendar output is used
-  if($view->base_table == 'civicrm_booking' && get_class($view->style_plugin) == 'calendar_plugin_style') {
+  if($view->base_table == 'civicrm_booking' && $view->plugin_name == 'calendar_style') {
     $queryString = preg_replace('/start_date/', 'end_date', $query->where['date']['conditions'][0]['field'], 1);
     $query->where['date']['conditions'][0]['field'] = $queryString;
   }
