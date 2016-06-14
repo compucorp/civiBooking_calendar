@@ -35,11 +35,11 @@ function civibooking_calendar_views_data_alter(&$data) {
     );
 
     $data['civicrm_booking']['status_id'] = array(
-        'title' => t('Status ID'),
-        'help' => t('Status ID'),
+        'title' => t('Status'),
+        'help' => t('Status'),
         'real field' => 'status_id',
         'field' => array(
-            'handler' => 'views_handler_field_numeric',
+            'handler' => 'views_handler_field',
             'click sortable' => TRUE,
         ),
         'argument' => array(
@@ -78,6 +78,7 @@ function civibooking_calendar_views_data_alter(&$data) {
         'filter' => array(
             'handler' => 'civicrm_handler_filter_datetime',
             'help' => t('Filter on CiviCRM Booking Start Date field.'),
+            'is date' => TRUE,
         ),
         'sort' => array(
             'handler' => 'civicrm_handler_sort_datetime',
@@ -101,6 +102,7 @@ function civibooking_calendar_views_data_alter(&$data) {
         'filter' => array(
             'handler' => 'civicrm_handler_filter_datetime',
             'help' => t('Filter on CiviCRM Booking End Date field.'),
+            'is date' => TRUE,
         ),
         'sort' => array(
             'handler' => 'civicrm_handler_sort_datetime',
@@ -243,8 +245,38 @@ function civibooking_calendar_views_data_alter(&$data) {
             'handler' => 'views_handler_relationship',
             'base' => 'civicrm_contact',
             'base field' => 'id',
-            'title' => t('CiviCRM Contact'),
-            'label' => t('civicrm contact join'),
+            'title' => t('CiviCRM Booking Primary Contact'),
+            'label' => t('civicrm primary contact join'),
+        ),
+    );
+
+    $data['civicrm_booking']['secondary_contact_id'] = array(
+        'title' => t('Secondary Contact ID'),
+        'help' => t('Secondary Contact ID'),
+        'real field' => 'secondary_contact_id',
+        'field' => array(
+            'handler' => 'views_handler_field_numeric',
+            'click sortable' => TRUE,
+        ),
+        'argument' => array(
+            'handler' => 'views_handler_argument_numeric',
+            'name field' => 'secondary_contact_id',
+            'numeric' => FALSE
+        ),
+        'filter' => array(
+            'handler' => 'views_handler_filter_numeric',
+            'help' => t('Filter on CiviCRM Booking Secondary Contact ID field.'),
+        ),
+        'sort' => array(
+            'handler' => 'views_handler_sort',
+            'help' => t('Sort on CiviCRM Booking Secondary Contact ID field.'),
+        ),
+        'relationship' => array(
+            'handler' => 'views_handler_relationship',
+            'base' => 'civicrm_contact',
+            'base field' => 'id',
+            'title' => t('CiviCRM Booking Secondary Contact'),
+            'label' => t('civicrm secondary contact join'),
         ),
     );
 }
@@ -274,7 +306,7 @@ function civibooking_calendar_views_plugins() {
             'calendar_style' => array(
                 'title' => t('Calendar'),
                 'help' => t('Present view results as a Calendar.'),
-                'handler' => 'calendar_plugin_style',
+                'handler' => 'civibooking_calendar_plugin_style',
                 'path' => "$module_path/includes",
                 'theme' => 'calendar_style',
                 'theme file' => 'theme.inc',
@@ -325,3 +357,25 @@ function civibooking_calendar_views_plugins() {
     return $data;
 }
 
+function civibooking_calendar_views_query_alter(&$view, &$query) {
+  // implement this only if the view is for civicrm_booking and calendar output is used
+  if($view->base_table == 'civicrm_booking' && $view->plugin_name == 'calendar_style') {
+    $queryString = preg_replace('/start_date/', 'end_date', $query->where['date']['conditions'][0]['field'], 1);
+    $query->where['date']['conditions'][0]['field'] = $queryString;
+  }
+}
+
+function civibooking_calendar_views_pre_render(&$view) {
+  if($view->base_table == 'civicrm_booking') {
+    $results = $view->result;
+
+    foreach($results as $key => $result) {
+      if(isset($result->civicrm_booking_status_id)) {
+        $bookingStatusMap = get_status_values();
+        $statusId = $result->civicrm_booking_status_id;
+        $results[$key]->civicrm_booking_status_id = $bookingStatusMap[$statusId];
+      }
+    }
+    $view->result = $results;
+  }
+}
