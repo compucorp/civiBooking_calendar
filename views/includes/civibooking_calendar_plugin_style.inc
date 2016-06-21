@@ -97,8 +97,13 @@ class civibooking_calendar_plugin_style extends calendar_plugin_style {
 
                   // Assign the item to the available bucket
                   //print($bucket_cnt + 1); die;
-                 // dsm($item);
-                  $endDay = date('N', $item->row->civicrm_booking_end_date);
+                  // dsm($item);
+                  if($item->type == 'civicrm_booking_slot') {
+                    $endDay = date('N', $item->row->civicrm_booking_slot_end);
+                  } else if ($item->type == 'civicrm_booking') {
+                    $endDay = date('N', $item->row->civicrm_booking_end_date);
+                  }
+
                   if( $endDay == 6 || $endDay == 7) {
                       $bucket_cnt = $bucket_cnt + 1;
                   }
