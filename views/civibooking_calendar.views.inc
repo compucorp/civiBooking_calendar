@@ -8,8 +8,124 @@
 function civibooking_calendar_views_data_alter(&$data) {
 
     $data['civicrm_booking']['id']['help'] = t('id');
-    $data['civicrm_booking']['id']['help'] = t('id');
+    $data['civicrm_booking_slot']['id']['help'] = t('id');
     $data['civicrm_booking']['date_argument']['argument']['handler'] = 'civibooking_calendar_date_views_argument_handler';
+    $data['civicrm_booking_slot']['date_argument']['argument']['handler'] = 'civibooking_calendar_date_views_argument_handler';
+
+    $data['civicrm_booking_slot']['resource_id'] = array (
+        'title' => t('Resource'),
+        'help' => t('Resource'),
+        'real field' => 'resource_id',
+        'field' => array(
+            'handler' => 'views_handler_field',
+            'click sortable' => TRUE,
+        ),
+        'argument' => array(
+            'handler' => 'views_handler_argument_numeric',
+            'name field' => 'resource id',
+            'numeric' => FALSE
+        ),
+        'filter' => array(
+            'handler' => 'views_handler_filter_numeric',
+            'help' => t('Filter on CiviCRM Booking Resource ID field.'),
+        ),
+        'sort' => array(
+            'handler' => 'views_handler_sort',
+            'help' => t('Sort on CiviCRM Booking Resource ID field.'),
+        ),
+    );
+
+    $data['civicrm_booking_slot']['is_cancelled'] = array (
+        'title' => t('Is Cancelled'),
+        'help' => t('Is Cancelled'),
+        'real field' => 'is_cancelled',
+        'field' => array(
+            'handler' => 'views_handler_field',
+            'click sortable' => TRUE,
+        ),
+        'argument' => array(
+            'handler' => 'views_handler_argument_numeric',
+            'name field' => 'is cancelled',
+            'numeric' => FALSE
+        ),
+        'filter' => array(
+            'handler' => 'views_handler_filter_numeric',
+        ),
+        'sort' => array(
+            'handler' => 'views_handler_sort',
+        ),
+    );
+
+    $data['civicrm_booking_slot']['is_deleted'] = array (
+        'title' => t('Is Deleted'),
+        'help' => t('Is Deleted'),
+        'real field' => 'is_deleted',
+        'field' => array(
+            'handler' => 'views_handler_field',
+            'click sortable' => TRUE,
+        ),
+        'argument' => array(
+            'handler' => 'views_handler_argument_numeric',
+            'name field' => 'is deleted',
+            'numeric' => FALSE
+        ),
+        'filter' => array(
+            'handler' => 'views_handler_filter_numeric',
+            'help' => t('Filter on CiviCRM Booking Resource ID field.'),
+        ),
+        'sort' => array(
+            'handler' => 'views_handler_sort',
+            'help' => t('Sort on CiviCRM Booking Resource ID field.'),
+        ),
+    );
+
+    $data['civicrm_booking_slot']['start'] = array(
+        'title' => t('Start Date'),
+        'help' => t('Start Date'),
+        'real field' => 'start',
+        'field' => array(
+            'handler' => 'civicrm_handler_field_datetime',
+            'click sortable' => TRUE,
+        ),
+        'argument' => array(
+            'handler' => 'views_handler_argument_date',
+            'name field' => 'resource start date',
+            'numeric' => FALSE
+        ),
+        'filter' => array(
+            'handler' => 'civicrm_handler_filter_datetime',
+            'help' => t('Filter on CiviCRM Booking Resource Start Date field.'),
+            'is date' => TRUE,
+        ),
+        'sort' => array(
+            'handler' => 'civicrm_handler_sort_datetime',
+            'help' => t('Sort on CiviCRM Booking Resource Start Date field.'),
+        ),
+    );
+
+    $data['civicrm_booking_slot']['end'] = array(
+        'title' => t('End Date'),
+        'help' => t('End Date'),
+        'real field' => 'end',
+        'field' => array(
+            'handler' => 'civicrm_handler_field_datetime',
+            'click sortable' => TRUE,
+        ),
+        'argument' => array(
+            'handler' => 'views_handler_argument_date',
+            'name field' => 'resource end date',
+            'numeric' => FALSE
+        ),
+        'filter' => array(
+            'handler' => 'civicrm_handler_filter_datetime',
+            'help' => t('Filter on CiviCRM Booking Resource End Date field.'),
+            'is date' => TRUE,
+        ),
+        'sort' => array(
+            'handler' => 'civicrm_handler_sort_datetime',
+            'help' => t('Sort on CiviCRM Booking Resource End Date field.'),
+        ),
+    );
 
     $data['civicrm_booking']['title'] = array(
         'title' => t('title'),

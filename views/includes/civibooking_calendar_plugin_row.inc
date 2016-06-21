@@ -8,12 +8,22 @@ class civibooking_calendar_plugin_row extends calendar_plugin_row {
 
   function explode_values($event)
   {
-    if(isset($event->row->civicrm_booking_end_date) && isset($event->row->civicrm_booking_start_date)){
+    if($event->type == 'civicrm_booking_slot') {
+        if(isset($event->row->civicrm_booking_slot_start) && isset($event->row->civicrm_booking_slot_end)) {
+            $end_date = date('Y-m-d H:i:s', $event->row->civicrm_booking_slot_end);
+            $start_date = date('Y-m-d H:i:s', $event->row->civicrm_booking_slot_start);
+        }
+    } else if ($event->type == 'civicrm_booking') {
+        if(isset($event->row->civicrm_booking_end_date) && isset($event->row->civicrm_booking_start_date)) {
+          $end_date = date('Y-m-d H:i:s', $event->row->civicrm_booking_end_date);
+          $start_date = date('Y-m-d H:i:s', $event->row->civicrm_booking_start_date);
+        }
+    }
+
+    if(isset($end_date) && isset($start_date)){
       $rows = array();
       $date_info = $this->date_argument->view->date_info;
-      $end_date = date('Y-m-d H:i:s', $event->row->civicrm_booking_end_date);
       $event->date_end = new DateObject($end_date);
-      $start_date = date('Y-m-d H:i:s', $event->row->civicrm_booking_start_date);
       $event->date_start = new DateObject($start_date);
       $item_start_date = $event->date_start;
       $item_end_date = $event->date_end;
