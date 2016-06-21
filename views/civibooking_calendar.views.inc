@@ -474,9 +474,12 @@ function civibooking_calendar_views_plugins() {
 }
 
 function civibooking_calendar_views_query_alter(&$view, &$query) {
-  // implement this only if the view is for civicrm_booking and calendar output is used
+  // implement this only if the view is for civicrm_booking/civicrm_booking_slot and calendar output is used
   if($view->base_table == 'civicrm_booking' && $view->plugin_name == 'calendar_style') {
     $queryString = preg_replace('/start_date/', 'end_date', $query->where['date']['conditions'][0]['field'], 1);
+    $query->where['date']['conditions'][0]['field'] = $queryString;
+  } else if ($view->base_table == 'civicrm_booking_slot' && $view->plugin_name == 'calendar_style') {
+    $queryString = preg_replace('/start/', 'end', $query->where['date']['conditions'][0]['field'], 1);
     $query->where['date']['conditions'][0]['field'] = $queryString;
   }
 }
