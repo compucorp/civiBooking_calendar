@@ -72,7 +72,7 @@ class civibooking_calendar_plugin_style extends calendar_plugin_style {
                   $diff =  $this->curday->difference($this->date_info->max_date, 'days');
                   //echo $wday;
                   //echo $diff;
-                  $remaining_days = ($this->date_info->granularity == 'month') ? min(6 - $wday, $diff) : $diff - 1;
+                  $remaining_days = ($this->date_info->granularity == 'month') ? min(6 - $wday, $diff) : $diff;
 
                   // The bucket_cnt defines the colspan.  colspan = bucket_cnt + 1
                   $days = $this->curday->difference($item->date_end, 'days');
@@ -96,17 +96,6 @@ class civibooking_calendar_plugin_style extends calendar_plugin_style {
                   $item->is_multi_day = TRUE;
 
                   // Assign the item to the available bucket
-                  //print($bucket_cnt + 1); die;
-                  // dsm($item);
-                  if($item->type == 'civicrm_booking_slot') {
-                    $endDay = date('N', $item->row->civicrm_booking_slot_end);
-                  } else if ($item->type == 'civicrm_booking') {
-                    $endDay = date('N', $item->row->civicrm_booking_end_date);
-                  }
-
-                  if( $endDay == 6 || $endDay == 7) {
-                      $bucket_cnt = $bucket_cnt + 1;
-                  }
                   $multiday_buckets[$wday][$bucket_index] = array(
                     'colspan' => $bucket_cnt + 1,
                     'rowspan' => 1,
