@@ -17,6 +17,7 @@ function civibooking_calendar_views_api() {
  */
 function civibooking_calendar_civicrm_alter_drupal_entities(&$whitelist) {
     $whitelist['civicrm_booking'] = 'booking';
+    $whitelist['civicrm_booking_slot'] = 'slot';
 }
 
 function get_status_values() {
