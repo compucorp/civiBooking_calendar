@@ -98,7 +98,7 @@ function civibooking_calendar_views_data_alter(&$data) {
             'is date' => TRUE,
         ),
         'sort' => array(
-            'handler' => 'civicrm_handler_sort_datetime',
+            'handler' => 'civicrm_handler_sort_date',
             'help' => t('Sort on CiviCRM Booking Resource Start Date field.'),
         ),
     );
@@ -122,7 +122,7 @@ function civibooking_calendar_views_data_alter(&$data) {
             'is date' => TRUE,
         ),
         'sort' => array(
-            'handler' => 'civicrm_handler_sort_datetime',
+            'handler' => 'civicrm_handler_sort_date',
             'help' => t('Sort on CiviCRM Booking Resource End Date field.'),
         ),
     );
@@ -197,7 +197,7 @@ function civibooking_calendar_views_data_alter(&$data) {
             'is date' => TRUE,
         ),
         'sort' => array(
-            'handler' => 'civicrm_handler_sort_datetime',
+            'handler' => 'civicrm_handler_sort_date',
             'help' => t('Sort on CiviCRM Booking Start Date field.'),
         ),
     );
@@ -221,7 +221,7 @@ function civibooking_calendar_views_data_alter(&$data) {
             'is date' => TRUE,
         ),
         'sort' => array(
-            'handler' => 'civicrm_handler_sort_datetime',
+            'handler' => 'civicrm_handler_sort_date',
             'help' => t('Sort on CiviCRM Booking End Date field.'),
         ),
     );
