@@ -94,6 +94,14 @@ class civibooking_calendar_plugin_row extends calendar_plugin_row {
         $pos++;
 
       }
+
+      // Fix for PCBK-265
+      if($this->view->style_options['calendar_type'] == 'day') {
+        foreach($rows as $k => $v) {
+          $rows[$k]->date_start = new DateObject($v->calendar_start);
+          $rows[$k]->date_end = new DateObject($v->calendar_end);
+        }
+      }
       return $rows;
     }
     else
