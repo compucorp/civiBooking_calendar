@@ -4,7 +4,7 @@ core = 7.x
 version = 7.x-1.0
 
 dependencies[] = civicrm
-dependencies[] = civicrm_entity
+dependencies[] = civicrm_entity (>=7.x-2.x-dev)
 dependencies[] = date
 dependencies[] = views
 dependencies[] = calendar
