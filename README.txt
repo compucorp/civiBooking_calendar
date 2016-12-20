@@ -2,7 +2,7 @@ Civibooking_calendar is a module that displays CiviBooking data on views calenda
 
 Dependencies:
 - civicrm
-- civicrm_entity Download link: https://github.com/eileenmcnaughton/civicrm_entity
+- civicrm_entity (version >= 7.x-2.x-dev) Download link: https://github.com/eileenmcnaughton/civicrm_entity
 - date
 - views
 - calendar
