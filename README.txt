@@ -14,8 +14,8 @@ Installation:
 
 To display bookings on Calendar:
    1. Go to "mysitename/admin/structure/views" and select "Add new from template"
-   2. Search for a civicrm_booking.start_date field and click add.
+   2. Search for 'start_date' field in the 'civicrm_booking' base table and click add.
 
 To display resources on Calendar:
    1. Go to "mysitename/admin/structure/views" and select "Add new from template"
-   2. Search for a civicrm_booking_slot.start field and click add.
+   2. Search for 'start' field in the 'civicrm_booking_slot' base table and click add.
